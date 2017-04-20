@@ -60,3 +60,7 @@ std::istream& operator>> (std::istream& is, int4k& val) {
 	}
 	return is;
 }
+
+int4k& int4k::operator+= (const int4k& val) {
+	return *this;
+}
