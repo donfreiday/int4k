@@ -62,5 +62,45 @@ std::istream& operator>> (std::istream& is, int4k& val) {
 }
 
 int4k& int4k::operator+= (const int4k& val) {
+	char* lhs = this->digits;
+	const char* rhs = val.digits;
+
+	__asm {
+		mov esi, 4095;      
+		mov edi, 4096;
+		mov ecx, 4096;
+		mov bh, 0;       // set carry value to zero;
+	L1:;
+		mov ah, 0;       // clear ah before addition;
+		mov edx,lhs
+		mov al, byte ptr [edx+esi];// get the MSD in al;
+		add al, bh;      // add the previous carry;
+		aaa;             // adjust the sum, ah = carry1;
+		mov bh, ah;      // save the carry in bh;
+		or bh, 30h;      // convert the carry in bh to ascii;
+
+		mov edx, rhs
+		add al, byte ptr [edx+esi];// add the second digit;
+		aaa;             // adjust the sum, ah = carry;
+		or bh, ah;       // or the carry with carry1;
+		; // or bh, 30h; convert carry to ascii;
+		; // or al, 30h; convert carry1 back to ascii;
+		;// mov sum[edi], al; save it in sum;
+		mov edx, lhs;
+		mov byte ptr[edx + esi], al;//save result
+
+
+		or bh, 30h;// convert carry to ascii;
+		or al, 30h;// convert carry1 back to ascii;
+
+		dec esi;// back up one digit;
+		dec edi;
+		loop L1;
+		; // we'll ignore the final carry, behavior on overflow is undefined
+		; // sub bh, 30h; convert back to decimal;
+		; // mov sum[edi], bh; save last carry digit;
+	}
+
+
 	return *this;
 }
