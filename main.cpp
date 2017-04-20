@@ -12,9 +12,14 @@ int main() {
 	cout << "Input integer: ";
 	cin >> i1;
 	cout << i1 << endl;*/
+	
 
-	int4k i1(3);
-	int4k i2(2);
+	//int4k i1(1);
+	//1999999999999999999
+	int4k i1;
+	int4k i2;
+	cin >> i1;
+	cin >> i2;
 	i1 += i2;
 	cout << i1 << endl;
 

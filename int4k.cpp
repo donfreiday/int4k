@@ -66,6 +66,30 @@ int4k& int4k::operator+= (const int4k& val) {
 	const char* rhs = val.digits;
 
 	__asm {
+		mov esi, lhs;
+		mov edi, rhs;
+		mov ecx, 0;
+		mov bh, 0; // Clear carry
+	L1:;
+		mov ah, 0; // Clear carry
+		mov al, [esi + ecx]; // al = lhs[i]
+		
+		;//handle carry
+		add al, bh;
+		aaa;
+		mov bh,ah	
+
+		add al, [edi + ecx]; // al = lhs[i]+rhs[i] , ah = carry from that
+		aaa;
+		or bh,ah
+		mov [esi+ecx],al // lhs[i] = al
+		inc ecx;
+		cmp ecx, 4096;
+		jl L1;
+	}
+
+
+	/*__asm {
 		mov esi, 4095;      
 		mov edi, 4096;
 		mov ecx, 4096;
@@ -99,7 +123,7 @@ int4k& int4k::operator+= (const int4k& val) {
 		; // we'll ignore the final carry, behavior on overflow is undefined
 		; // sub bh, 30h; convert back to decimal;
 		; // mov sum[edi], bh; save last carry digit;
-	}
+	}*/
 
 
 	return *this;
