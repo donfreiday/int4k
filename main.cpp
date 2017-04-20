@@ -23,7 +23,8 @@ int main() {
 	i1 += i2;
 	cout << i1 << endl;
 
-
+	int4k i3 = i1 + i1;
+	cout <<i1<<" + "<<i1<< " = " << i3 <<endl;
 
 
 	system("pause");

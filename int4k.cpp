@@ -85,3 +85,9 @@ int4k& int4k::operator+= (const int4k& val) {
 	}
 	return *this;
 }
+
+int4k int4k::operator+ (const int4k& val) const {
+	int4k result(*this);
+	result += val;
+	return result;
+}
