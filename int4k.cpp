@@ -92,3 +92,26 @@ int4k int4k::operator+ (const int4k& val) const {
 	return result;
 }
 
+int4k& int4k::operator*= (const int4k& val) {
+	char* lhs = this->digits;
+	const char* rhs = val.digits;
+
+	__asm {
+		mov esi, lhs;
+		mov edi, rhs;
+		mov ecx, 0;          // Counter
+		mov bh, 0;           // Clear carry
+	L1:;
+		mov bl, [esi + ecx]; // bl = lhs[i]
+		mov al, [edi + ecx]; // al = rhs[i]
+		mul bl;              // ax = al * bl
+		add al, bh           // add the carry
+		aam;                 // al = value, ah = carry
+		mov bh, ah;          // bh = carry
+		mov[esi + ecx], al;  // lhs[i] = al
+		inc ecx;
+		cmp ecx, 4096;
+		jl L1;
+	}
+	return *this;
+}

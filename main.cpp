@@ -11,12 +11,23 @@ int main() {
 	cin >> i1;
 	cin >> i2;
 
+	// Test *= 
+	// TODO: fix
+	cout << i1;
+	i1 *= i2;
+	cout << " * " << i2 << " = " << i1 << endl;
+
+	// Test +=
 	cout << i1 << " + " << i2 << " = ";
 	i1 += i2;
 	cout << i1 << endl;
 
+	// Test +
 	int4k i3 = i1 + i2;
 	cout <<i1<<" + "<<i2<< " = " << i3 <<endl;
+
+	
+
 
 	system("pause");
 	return 0;
