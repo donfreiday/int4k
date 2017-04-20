@@ -74,11 +74,11 @@ int4k& int4k::operator+= (const int4k& val) {
 		mov al, [esi + ecx]; // al = lhs[i]
 		add al, bh;          // add the carry from last addition
 		aaa;              
-		mov bh,ah	         // save the carry from adding the previous carry
+		mov bh, ah;	         // save the carry from adding the previous carry
 		add al, [edi + ecx]; // al = lhs[i] + rhs[i]
 		aaa;
-		or bh,ah             // See if either addition generated a carry
-		mov [esi+ecx],al     // lhs[i] = al
+		or bh, ah;           // See if either addition generated a carry
+		mov[esi + ecx], al;  // lhs[i] = al
 		inc ecx;
 		cmp ecx, 4096;
 		jl L1;
@@ -91,3 +91,4 @@ int4k int4k::operator+ (const int4k& val) const {
 	result += val;
 	return result;
 }
+

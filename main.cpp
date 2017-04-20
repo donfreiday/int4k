@@ -18,7 +18,6 @@ int main() {
 	int4k i3 = i1 + i2;
 	cout <<i1<<" + "<<i2<< " = " << i3 <<endl;
 
-
 	system("pause");
 	return 0;
 }
