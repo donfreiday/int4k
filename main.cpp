@@ -3,31 +3,24 @@
 using namespace std;
 
 int main() {
-	cout << "Input 2 integers: ";
+	int4k i1(1000);
 
-	// 9999999999999999999 is 1 away from overflow
-	int4k i1;
-	int4k i2;
-	cin >> i1;
-	cin >> i2;
+	for (int i = 999; i > 0; i--)
+		i1 *= i;
+	cout << i1 << endl;
 
-	// Test *= 
-	// TODO: fix
-	cout << i1;
-	i1 *= i2;
-	cout << " * " << i2 << " = " << i1 << endl;
 
-	// Test +=
+	//i1 *= i2;
+	//cout << " * " << i2 << " = " << i1 << endl;
+
+	/*// Test +=
 	cout << i1 << " + " << i2 << " = ";
 	i1 += i2;
 	cout << i1 << endl;
 
 	// Test +
 	int4k i3 = i1 + i2;
-	cout <<i1<<" + "<<i2<< " = " << i3 <<endl;
-
-	
-
+	cout <<i1<<" + "<<i2<< " = " << i3 <<endl;*/
 
 	system("pause");
 	return 0;

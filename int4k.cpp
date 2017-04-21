@@ -93,25 +93,40 @@ int4k int4k::operator+ (const int4k& val) const {
 }
 
 int4k& int4k::operator*= (const int4k& val) {
-	char* lhs = this->digits;
 	const char* rhs = val.digits;
+	int4k result;
+	for (int i = 0; i < 4096; i++) {
+		result+= this->multiplyByChar(rhs[i], i);
+	}
+	for (int i = 0; i < 4096; i++)
+		this->digits[i] = result.digits[i];
+	return *this;
+}
 
+
+int4k int4k::multiplyByChar(char c, int shift) {
+	int4k result;
+	char* digits = this->digits;
+	char* resultDigits = result.digits;
+	int loops = 4096 - shift;
 	__asm {
-		mov esi, lhs;
-		mov edi, rhs;
-		mov ecx, 0;          // Counter
-		mov bh, 0;           // Clear carry
+		mov esi, digits;
+		mov edi, resultDigits;
+		add edi, shift;
+		mov ecx, 0;
+		mov bh, 0; // clear carry
 	L1:;
-		mov bl, [esi + ecx]; // bl = lhs[i]
-		mov al, [edi + ecx]; // al = rhs[i]
-		mul bl;              // ax = al * bl
-		add al, bh           // add the carry
-		aam;                 // al = value, ah = carry
-		mov bh, ah;          // bh = carry
-		mov[esi + ecx], al;  // lhs[i] = al
+		mov bl, [esi + ecx]; // bl = digits[i]
+		mov al, c;           // al = c
+		mul bl;              // ax = digits[i] * c
+		aam;
+		add al, bh;          // Add in the carry
+		mov[edi + ecx], al;  // result[i] = al
+		mov bh, ah;          // Save the carry
+
 		inc ecx;
-		cmp ecx, 4096;
+		cmp ecx, loops;
 		jl L1;
 	}
-	return *this;
+	return result;
 }

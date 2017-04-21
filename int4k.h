@@ -8,6 +8,7 @@ class int4k {
 protected:
 	char digits[4096]; // 4095 digits, plus 1 for overflow
 	void init_digits();
+	int4k multiplyByChar(char c, int shift);
 public:
 	int4k();
 	int4k(int val);
