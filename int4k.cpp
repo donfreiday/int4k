@@ -68,20 +68,20 @@ int4k& int4k::operator+= (const int4k& val) {
 		mov esi, lhs;
 		mov edi, rhs;
 		mov ecx, 0;          // Counter
-		mov bh, 0;           // Clear carry
+		clc;
+		pushfd;
 	L1:;
 		mov ah, 0;           // Clear ah for ascii addition
 		mov al, [esi + ecx]; // al = lhs[i]
-		add al, bh;          // add the carry from last addition
-		aaa;              
-		mov bh, ah;	         // save the carry from adding the previous carry
-		add al, [edi + ecx]; // al = lhs[i] + rhs[i]
+		popfd
+		adc al, [edi + ecx]; // al = lhs[i] + rhs[i]
 		aaa;
-		or bh, ah;           // See if either addition generated a carry
+		pushfd
 		mov[esi + ecx], al;  // lhs[i] = al
 		inc ecx;
 		cmp ecx, 4096;
 		jl L1;
+		popfd
 	}
 	return *this;
 }
