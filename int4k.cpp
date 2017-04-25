@@ -67,9 +67,8 @@ int4k& int4k::operator+= (const int4k& val) {
 	__asm {
 		mov esi, lhs;
 		mov edi, rhs;
-		mov ecx, 4096;          // Counter
+		mov ecx, 4096;
 		clc;
-		
 	L1:;
 		mov al, [esi]; // al = lhs[i]
 		adc al, [edi]; // al = lhs[i] + rhs[i] + CF
@@ -124,5 +123,11 @@ int4k int4k::multiplyByChar(char c, int shift) {
 		cmp ecx, loops;
 		jl L1;
 	}
+	return result;
+}
+
+int4k int4k::operator* (const int4k& val) const {
+	int4k result(*this);
+	result *= val;
 	return result;
 }
