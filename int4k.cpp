@@ -62,10 +62,10 @@ std::istream& operator>> (std::istream& is, int4k& val) {
 }
 
 int4k& int4k::operator+= (const int4k& rhs) {
-	char* digits = this->digits;
+	char* lhsDigits = this->digits;
 	const char* rhsDigits = rhs.digits;
 	__asm {
-		mov esi, digits;
+		mov esi, lhsDigits;
 		mov edi, rhsDigits;
 		mov ecx, 4096;
 		clc;
@@ -100,11 +100,11 @@ int4k& int4k::operator*= (const int4k& rhs) {
 }
 
 int4k int4k::multiplyByChar(char c, int shift) {
-	char* digits = this->digits;
+	char* lhsDigits = this->digits;
 	int4k result;
 	char* resultDigits = result.digits;
 	__asm {
-		mov esi, digits;
+		mov esi, lhsDigits;
 		mov edi, resultDigits;
 		add edi, shift;
 		mov bl, c;
@@ -112,8 +112,8 @@ int4k int4k::multiplyByChar(char c, int shift) {
 		mov ecx, 4096;
 		sub ecx, shift;
 	L1:
-		mov al, [esi]; // al = digits[i]
-		mul bl;        // ax = digits[i] * c
+		mov al, [esi]; // al = lhsDigits[i]
+		mul bl;        // ax = lhsDigits[i] * c
 		aam;           // ah = carry from multiplication, al = product
 		mov dh, ah;    // tempCarry
 		mov ah, 0;     // ah needs to be clear for aaa
@@ -136,6 +136,22 @@ int4k int4k::operator* (const int4k& val) const {
 }
 
 int4k& int4k::operator-=(const int4k& rhs) {
-	
+	char* lhsDigits = this->digits;
+	const char* rhsDigits = rhs.digits;
+	__asm {
+		mov esi, lhsDigits;
+		mov edi, rhsDigits;
+		mov ecx, 4096;
+		clc;
+	L1:;
+		mov al, [esi]; // al = lhs[i]
+		mov bl, [edi]; // bl = 
+		sbb al, bl;    // al = result of sub
+		aaa;
+		mov[esi], al;  // lhs[i] = al
+		inc esi;
+		inc edi;
+		loop L1
+	}
 	return *this;
 }
