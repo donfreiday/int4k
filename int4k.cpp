@@ -99,7 +99,6 @@ int4k& int4k::operator*= (const int4k& val) {
 	return *this;
 }
 
-
 int4k int4k::multiplyByChar(char c, int shift) {
 	char* digits = this->digits;
 	int4k result;
@@ -109,22 +108,20 @@ int4k int4k::multiplyByChar(char c, int shift) {
 		mov edi, resultDigits;
 		add edi, shift;
 		mov bl, c;
-		mov bh, 0; // prevCarry = 0
+		mov bh, 0;     // prevCarry = 0
 		mov ecx, 4096;
 		sub ecx, shift;
 	L1:
-
 		mov al, [esi]; // al = digits[i]
 		mul bl;        // ax = digits[i] * c
 		aam;           // ah = carry from multiplication, al = product
 		mov dh, ah;    // tempCarry
-		mov ah, 0;
+		mov ah, 0;     // ah needs to be clear for aaa
 		add al, bh;    // add carry
-		aaa;
-		mov[edi], al;
-		mov bh, ah;
-		add bh, dh;
-		
+		aaa;           // ah = carry from addition, al = sum
+		mov[edi], al;  // resultDigits[i] = sum
+		mov bh, ah;    // carry = carry from addition
+		add bh, dh;    // carry += carry from multiplication
 		inc esi;
 		inc edi;
 		loop L1;
