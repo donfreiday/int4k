@@ -67,21 +67,17 @@ int4k& int4k::operator+= (const int4k& val) {
 	__asm {
 		mov esi, lhs;
 		mov edi, rhs;
-		mov ecx, 0;          // Counter
+		mov ecx, 4096;          // Counter
 		clc;
-		pushfd;
+		
 	L1:;
-		mov ah, 0;           // Clear ah for ascii addition
-		mov al, [esi + ecx]; // al = lhs[i]
-		popfd
-		adc al, [edi + ecx]; // al = lhs[i] + rhs[i]
+		mov al, [esi]; // al = lhs[i]
+		adc al, [edi]; // al = lhs[i] + rhs[i] + CF
 		aaa;
-		pushfd
-		mov[esi + ecx], al;  // lhs[i] = al
-		inc ecx;
-		cmp ecx, 4096;
-		jl L1;
-		popfd
+		mov[esi], al;  // lhs[i] = al
+		inc esi;
+		inc edi;
+		loop L1
 	}
 	return *this;
 }
