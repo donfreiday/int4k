@@ -61,12 +61,12 @@ std::istream& operator>> (std::istream& is, int4k& val) {
 	return is;
 }
 
-int4k& int4k::operator+= (const int4k& val) {
-	char* lhs = this->digits;
-	const char* rhs = val.digits;
+int4k& int4k::operator+= (const int4k& rhs) {
+	char* digits = this->digits;
+	const char* rhsDigits = rhs.digits;
 	__asm {
-		mov esi, lhs;
-		mov edi, rhs;
+		mov esi, digits;
+		mov edi, rhsDigits;
 		mov ecx, 4096;
 		clc;
 	L1:;
@@ -81,18 +81,18 @@ int4k& int4k::operator+= (const int4k& val) {
 	return *this;
 }
 
-int4k int4k::operator+ (const int4k& val) const {
+int4k int4k::operator+ (const int4k& rhs) const {
 	int4k result(*this);
-	result += val;
+	result += rhs;
 	return result;
 }
 
-int4k& int4k::operator*= (const int4k& val) {
-	const char* rhs = val.digits;
+int4k& int4k::operator*= (const int4k& rhs) {
+	const char* rhsDigits = rhs.digits;
 	int4k result;
 	for (int i = 0; i < 4096; i++) {
-		if (rhs[i] != 0)
-			result+= this->multiplyByChar(rhs[i], i);
+		if (rhsDigits[i] != 0)
+			result+= this->multiplyByChar(rhsDigits[i], i);
 	}
 	for (int i = 0; i < 4096; i++)
 		this->digits[i] = result.digits[i];
@@ -133,4 +133,9 @@ int4k int4k::operator* (const int4k& val) const {
 	int4k result(*this);
 	result *= val;
 	return result;
+}
+
+int4k& int4k::operator-=(const int4k& rhs) {
+	
+	return *this;
 }
