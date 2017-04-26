@@ -154,3 +154,9 @@ int4k& int4k::operator-=(const int4k& rhs) {
 	}
 	return *this;
 }
+
+int4k int4k::operator- (const int4k& rhs) const {
+	int4k result(*this);
+	result -= rhs;
+	return result;
+}
