@@ -135,7 +135,7 @@ int4k int4k::operator* (const int4k& val) const {
 	return result;
 }
 
-int4k& int4k::operator-=(const int4k& rhs) {
+int4k& int4k::operator-= (const int4k& rhs) {
 	char* lhsDigits = this->digits;
 	const char* rhsDigits = rhs.digits;
 	__asm {
@@ -158,5 +158,19 @@ int4k& int4k::operator-=(const int4k& rhs) {
 int4k int4k::operator- (const int4k& rhs) const {
 	int4k result(*this);
 	result -= rhs;
+	return result;
+}
+
+int4k& int4k::operator/= (const int4k& rhs) {
+	char* lhsDigits = this->digits;
+	const char* rhsDigits = rhs.digits;
+
+
+	return *this;
+}
+
+int4k int4k::operator/ (const int4k& rhs) const {
+	int4k result(*this);
+	result /= rhs;
 	return result;
 }

@@ -16,10 +16,12 @@ public:
 	int4k operator+ (const int4k& val) const;
 	int4k operator- (const int4k& val) const;
 	int4k operator* (const int4k& val) const;
+	int4k operator/ (const int4k& val) const;
 
 	int4k& operator+= (const int4k& val);
 	int4k& operator-= (const int4k& val);
 	int4k& operator*= (const int4k& val);
+	int4k& operator/= (const int4k& val);
 };
 
 
