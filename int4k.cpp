@@ -145,9 +145,8 @@ int4k& int4k::operator-=(const int4k& rhs) {
 		clc;
 	L1:;
 		mov al, [esi]; // al = lhs[i]
-		mov bl, [edi]; // bl = 
-		sbb al, bl;    // al = result of sub
-		aaa;
+		sbb al, [edi]; // al = result of sub
+		aas;           // ah = adjusted difference
 		mov[esi], al;  // lhs[i] = al
 		inc esi;
 		inc edi;
