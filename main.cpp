@@ -13,10 +13,10 @@ int main() {
 	cin >> i1 >> i2;
 	/*i1 -= i2;
 	cout << i1 << endl;*/
-	cout << i1 / i2 << endl;
-	/*if (i1 >= i2) {
+	//cout << i1 / i2 << endl;
+	if (i1 >= i2) {
 		cout << i1 << ">=" << i2<<endl;
-	}*/
+	}
 
 	/*int4k i1;
 	int4k i2;
