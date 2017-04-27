@@ -168,8 +168,13 @@ int4k& int4k::operator/= (const int4k& rhs) {
 }
 
 int4k int4k::operator/ (const int4k& rhs) const {
-	int4k quotient, tmp(*this);
-	return quotient;
+	int4k tmp(*this);
+	int quotient = 0;
+	while (tmp >= rhs) {
+		tmp -= rhs;
+		quotient++;
+	}
+	return int4k(quotient);
 	
 }
 
