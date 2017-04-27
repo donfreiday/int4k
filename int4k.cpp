@@ -162,17 +162,15 @@ int4k int4k::operator- (const int4k& rhs) const {
 }
 
 int4k& int4k::operator/= (const int4k& rhs) {
-	char* lhsDigits = this->digits;
-	const char* rhsDigits = rhs.digits;
-
+	
 
 	return *this;
 }
 
 int4k int4k::operator/ (const int4k& rhs) const {
-	int4k result(*this);
-	result /= rhs;
-	return result;
+	int4k quotient, tmp(*this);
+	return quotient;
+	
 }
 
 bool int4k::operator> (const int4k& rhs) {
@@ -183,4 +181,15 @@ bool int4k::operator> (const int4k& rhs) {
 			return false;
 	}
 	return false;
+}
+
+bool int4k::operator>= (const int4k& rhs) {
+	bool result;
+	for (int i = 4095; i >= 0; i--) {
+		if (this->digits[i] >= rhs.digits[i])
+			result = true;
+		else if (this->digits[i] < rhs.digits[i])
+			result = false;
+	}
+	return result;
 }
