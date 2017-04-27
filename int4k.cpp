@@ -75,8 +75,8 @@ int4k& int4k::operator+= (const int4k& rhs) {
 		aaa;
 		mov[esi], al;  // lhs[i] = al
 		inc esi;
-		inc edi;
-		loop L1
+inc edi;
+loop L1
 	}
 	return *this;
 }
@@ -92,7 +92,7 @@ int4k& int4k::operator*= (const int4k& rhs) {
 	int4k result;
 	for (int i = 0; i < 4096; i++) {
 		if (rhsDigits[i] != 0)
-			result+= this->multiplyByChar(rhsDigits[i], i);
+			result += this->multiplyByChar(rhsDigits[i], i);
 	}
 	for (int i = 0; i < 4096; i++)
 		this->digits[i] = result.digits[i];
@@ -173,4 +173,14 @@ int4k int4k::operator/ (const int4k& rhs) const {
 	int4k result(*this);
 	result /= rhs;
 	return result;
+}
+
+bool int4k::operator> (const int4k& rhs) {
+	for (int i = 4095; i >= 0; i--) {
+		if (this->digits[i] > rhs.digits[i])
+			return true;
+		else if (this->digits[i] < rhs.digits[i])
+			return false;
+	}
+	return false;
 }

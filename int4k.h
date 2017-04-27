@@ -22,6 +22,8 @@ public:
 	int4k& operator-= (const int4k& val);
 	int4k& operator*= (const int4k& val);
 	int4k& operator/= (const int4k& val);
+
+	bool operator> (const int4k& rhs);
 };
 
 
