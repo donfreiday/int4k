@@ -18,6 +18,7 @@ int main() {
 		cout << i1 << ">=" << i2<<endl;
 	}
 
+
 	/*int4k i1;
 	int4k i2;
 	cin >> i1 >> i2;

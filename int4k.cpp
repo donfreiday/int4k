@@ -190,13 +190,13 @@ bool int4k::operator> (const int4k& rhs) {
 
 bool int4k::operator>= (const int4k& rhs) {
 	bool result;
-	for (int i = 2; i >= 0; i--) {
+	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] > rhs.digits[i])
 			return true;
-		else if (this->digits[i] == rhs.digits[i])
-			result = true;
+//		else if (this->digits[i] == rhs.digits[i])
+//			result = true;
 		else if (this->digits[i] < rhs.digits[i])
 			return false;
 	}
-	return result;
+	return true;
 }
