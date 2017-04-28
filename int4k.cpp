@@ -169,12 +169,12 @@ int4k& int4k::operator/= (const int4k& rhs) {
 
 int4k int4k::operator/ (const int4k& rhs) const {
 	int4k tmp(*this);
-	int quotient = 0;
+	int4k quotient;
 	while (tmp >= rhs) {
 		tmp -= rhs;
-		quotient++;
+		quotient+=1;
 	}
-	return int4k(quotient);
+	return quotient;
 	
 }
 
@@ -193,8 +193,6 @@ bool int4k::operator>= (const int4k& rhs) {
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] > rhs.digits[i])
 			return true;
-//		else if (this->digits[i] == rhs.digits[i])
-//			result = true;
 		else if (this->digits[i] < rhs.digits[i])
 			return false;
 	}
