@@ -168,6 +168,7 @@ int4k& int4k::operator/= (const int4k& rhs) {
 	return *this;
 }
 
+// Issue #1 : Division is slow. Really slow.
 int4k int4k::operator/ (const int4k& rhs) const {
 	int4k tmp(*this);
 	int4k quotient;
