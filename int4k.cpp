@@ -173,7 +173,7 @@ int4k int4k::operator/ (const int4k& rhs) const {
 	int4k quotient;
 	while (tmp >= rhs) {
 		tmp -= rhs;
-		quotient+=1;
+		++quotient;
 	}
 	return quotient;
 	
@@ -198,4 +198,17 @@ bool int4k::operator>= (const int4k& rhs) {
 			return false;
 	}
 	return true;
+}
+
+// prefix ++: no parameter, returns a reference
+int4k& int4k::operator++ () {
+	*this += 1;
+	return *this;
+}
+
+// postfix ++: dummy parameter, returns a value
+int4k int4k::operator++ (int) {
+	int4k result(*this);
+	++(*this);
+	return result;
 }
