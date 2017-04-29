@@ -1,0 +1,1 @@
+A class to demonstrate the usage of the Intel x86 ASCII adjusted addition (AAA), subtraction (AAS), and multiplication (AAM) instructions. Implements unsigned integers as an array of unpacked BCD digits up to 4095 bytes in length.
