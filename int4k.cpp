@@ -190,11 +190,30 @@ bool int4k::operator> (const int4k& rhs) {
 }
 
 bool int4k::operator>= (const int4k& rhs) {
-	bool result;
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] > rhs.digits[i])
 			return true;
 		else if (this->digits[i] < rhs.digits[i])
+			return false;
+	}
+	return true;
+}
+
+bool int4k::operator< (const int4k& rhs) {
+	for (int i = 4095; i >= 0; i--) {
+		if (this->digits[i] < rhs.digits[i])
+			return true;
+		else if (this->digits[i] > rhs.digits[i])
+			return false;
+	}
+	return false;
+}
+
+bool int4k::operator<= (const int4k& rhs) {
+	for (int i = 4095; i >= 0; i--) {
+		if (this->digits[i] < rhs.digits[i])
+			return true;
+		else if (this->digits[i] > rhs.digits[i])
 			return false;
 	}
 	return true;

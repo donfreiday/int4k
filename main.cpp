@@ -10,10 +10,10 @@ int main() {
 
 	int4k i1;
 	int4k i2;
-	cin >> i1 >> i2;
+	cin >> i1;
 	/*i1 -= i2;
 	cout << i1 << endl;*/
-	cout << i1 / i2 << endl;
+	cout << --i1 << endl;
 	/*if (i1 >= i2) {
 		cout << i1 << ">=" << i2<<endl;
 	}*/

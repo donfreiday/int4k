@@ -29,7 +29,9 @@ public:
 	int4k operator-- (int); // postfix --: dummy parameter, returns a value
 
 	bool operator> (const int4k& rhs);
+	bool operator< (const int4k& rhs);
 	bool operator>= (const int4k& rhs);
+	bool operator<= (const int4k& rhs);
 };
 
 
