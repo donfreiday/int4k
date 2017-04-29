@@ -75,8 +75,8 @@ int4k& int4k::operator+= (const int4k& rhs) {
 		aaa;
 		mov[esi], al;  // lhs[i] = al
 		inc esi;
-inc edi;
-loop L1
+		inc edi;
+		loop L1;
 	}
 	return *this;
 }
