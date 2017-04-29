@@ -25,6 +25,8 @@ public:
 
 	int4k& operator++ (); // prefix ++: no parameter, returns a reference
 	int4k operator++ (int); // postfix ++: dummy parameter, returns a value
+	int4k& operator-- (); // prefix --: no parameter, returns a reference
+	int4k operator-- (int); // postfix --: dummy parameter, returns a value
 
 	bool operator> (const int4k& rhs);
 	bool operator>= (const int4k& rhs);

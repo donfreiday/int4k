@@ -212,3 +212,16 @@ int4k int4k::operator++ (int) {
 	++(*this);
 	return result;
 }
+
+// prefix --: no parameter, returns a reference
+int4k& int4k::operator-- () {
+	*this -= 1;
+	return *this;
+}
+
+// postfix --: dummy parameter, returns a value
+int4k int4k::operator-- (int) {
+	int4k result(*this);
+	--(*this);
+	return result;
+}
