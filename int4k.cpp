@@ -129,9 +129,9 @@ int4k int4k::multiplyByChar(char c, int shift) {
 	return result;
 }
 
-int4k int4k::operator* (const int4k& val) const {
+int4k int4k::operator* (const int4k& rhs) const {
 	int4k result(*this);
-	result *= val;
+	result *= rhs;
 	return result;
 }
 
@@ -244,4 +244,12 @@ int4k int4k::operator-- (int) {
 	int4k result(*this);
 	--(*this);
 	return result;
+}
+
+bool int4k::operator== (const int4k& rhs) const {
+	for (int i = 0; i < 4096; i++) {
+		if (this->digits[i] != rhs.digits[i])
+			return false;
+	}
+	return true;
 }
