@@ -180,7 +180,7 @@ int4k int4k::operator/ (const int4k& rhs) const {
 	
 }
 
-bool int4k::operator> (const int4k& rhs) {
+bool int4k::operator> (const int4k& rhs) const{
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] > rhs.digits[i])
 			return true;
@@ -190,7 +190,7 @@ bool int4k::operator> (const int4k& rhs) {
 	return false;
 }
 
-bool int4k::operator>= (const int4k& rhs) {
+bool int4k::operator>= (const int4k& rhs) const{
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] > rhs.digits[i])
 			return true;
@@ -200,7 +200,7 @@ bool int4k::operator>= (const int4k& rhs) {
 	return true;
 }
 
-bool int4k::operator< (const int4k& rhs) {
+bool int4k::operator< (const int4k& rhs) const{
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] < rhs.digits[i])
 			return true;
@@ -210,7 +210,7 @@ bool int4k::operator< (const int4k& rhs) {
 	return false;
 }
 
-bool int4k::operator<= (const int4k& rhs) {
+bool int4k::operator<= (const int4k& rhs) const{
 	for (int i = 4095; i >= 0; i--) {
 		if (this->digits[i] < rhs.digits[i])
 			return true;
