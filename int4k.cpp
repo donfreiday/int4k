@@ -94,8 +94,7 @@ int4k& int4k::operator*= (const int4k& rhs) {
 		if (rhsDigits[i] != 0)
 			result += this->multiplyByChar(rhsDigits[i], i);
 	}
-	for (int i = 0; i < 4096; i++)
-		this->digits[i] = result.digits[i];
+	memmove(this->digits, result.digits, 4096);
 	return *this;
 }
 
