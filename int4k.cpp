@@ -161,8 +161,7 @@ int4k int4k::operator- (const int4k& rhs) const {
 }
 
 int4k& int4k::operator/= (const int4k& rhs) {
-	int4k result (*this / rhs);
-	memmove(this->digits, rhs.digits, 4096);
+	*this = *this / rhs;
 	return *this;
 }
 
