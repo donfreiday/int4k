@@ -250,3 +250,9 @@ bool int4k::operator== (const int4k& rhs) const {
 	}
 	return true;
 }
+
+bool int4k::operator!= (const int4k& rhs) const {
+	if (*this == rhs)
+		return false;
+	return true;
+}

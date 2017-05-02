@@ -33,6 +33,7 @@ public:
 	bool operator>= (const int4k& rhs) const;
 	bool operator<= (const int4k& rhs) const;
 	bool operator== (const int4k& rhs) const;
+	bool operator!= (const int4k& rhs) const;
 };
 
 
